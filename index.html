@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <!-- 
+        QUÁN CÀ PHÊ - WEBSITE BÁN HÀNG ONLINE
+        Chức năng: Hiển thị sản phẩm, quản lý giỏ hàng, đăng nhập, thanh toán
+        Sections: Header, Hero, Products, Desserts, Contact, History, Cart, Creators, Footer
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ Cà Phê - Quán Cà Phê Chất Lượng Cao</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container header-wrapper">
+            <div class="header-top">
+                <div class="logo">☕ CÀ PHÊ</div>
+                <div class="header-right">
+                    <a href="#cart" class="cart-link mobile-show" onclick="showCart(); return false;">🛒 <span class="cart-count">0</span></a>
+                    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+                </div>
+            </div>
+            <nav id="navMenu" class="nav-menu">
+                <a href="#" class="nav-link" onclick="hideCartAndHistory(); return false;">🏠 Trang Chủ</a>
+                <a href="#products" class="nav-link">📦 Sản Phẩm</a>
+                <a href="#desserts" class="nav-link">🍰 Tráng Miệng</a>
+                <a href="#contact" class="nav-link">📞 Liên Hệ</a>
+                <a href="#creators" class="nav-link" onclick="showCreators(); return false;">👥 Về Chúng Tôi</a>
+                <a href="#history" class="nav-link" onclick="showHistory(); return false;">📋 Lịch Sử</a>
+                <a href="#cart" class="cart-link desktop-show" onclick="showCart(); return false;">🛒 <span class="cart-count">0</span></a>
+                <a href="#cart" class="nav-link mobile-show" onclick="showCart(); return false;">🛒 Giỏ</a>
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn-auth" onclick="openLoginModal()">Đăng Nhập</button>
+                    <button id="logoutBtn" class="btn-auth btn-logout" onclick="logout()" style="display: none;">Đăng Xuất</button>
+                    <span id="userDisplay" class="user-display" style="display: none;"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>☕ Cà Phê Chất Lượng Cao</h1>
+            <p>Thưởng thức hương vị cà phê tuyệt vời từ những hạt cà phê được chọn lọc kỹ càng</p>
+            <a href="#products" class="cta-button">Đặt Hàng Ngay</a>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Danh Sách Cà Phê</h2>
+        <div class="container">
+            <!-- Sidebar Lọc -->
+            <aside class="sidebar">
+                <h3>Lọc Sản Phẩm</h3>
+                <div class="sidebar-section">
+                    <h4>Loại Cà Phê</h4>
+                    <div class="sidebar-item">
+                        <input type="checkbox" id="coffee1" checked>
+                        <label for="coffee1">Cà phê đen</label>
+                    </div>
+                    <div class="sidebar-item">
+                        <input type="checkbox" id="coffee2" checked>
+                        <label for="coffee2">Cà phê sữa</label>
+                    </div>
+                    <div class="sidebar-item">
+                        <input type="checkbox" id="coffee3" checked>
+                        <label for="coffee3">Cà phê đá</label>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h4>Giá</h4>
+                    <div class="sidebar-item">
+                        <input type="checkbox" id="price1" checked>
+                        <label for="price1">Dưới 30k</label>
+                    </div>
+                    <div class="sidebar-item">
+                        <input type="checkbox" id="price2" checked>
+                        <label for="price2">30k - 40k</label>
+                    </div>
+                    <div class="sidebar-item">
+                        <input type="checkbox" id="price3" checked>
+                        <label for="price3">Trên 40k</label>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h4>Sắp Xếp</h4>
+                    <select id="sortSelect" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px;">
+                        <option value="newest">Mới nhất</option>
+                        <option value="price-asc">Giá: Thấp → Cao</option>
+                        <option value="price-desc">Giá: Cao → Thấp</option>
+                        <option value="popular">Phổ biến nhất</option>
+                    </select>
+                </div>
+            </aside>
+            <div class="content">
+                <div class="products">
+                    <div class="product-card" data-type="coffee-black" data-price="28000">
+                        <div class="product-image"><img src="images/Espresso Đen.PNG" alt="Espresso Đen"></div>
+                        <div class="product-info">
+                            <h3>Espresso Đen</h3>
+                            <p>Cà phê espresso đơn thuần, đậm đà và mạnh mẽ, hoàn hảo cho những người yêu thích hương vị cà phê nguyên chất.</p>
+                            <div class="price">28.000₫</div>
+                            <button class="add-to-cart">Thêm vào Giỏ</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-type="coffee-milk" data-price="38000">
+                        <div class="product-image"><img src="images/Cappuccino.PNG" alt="Cappuccino"></div>
+                        <div class="product-info">
+                            <h3>Cappuccino</h3>
+                            <p>Cappuccino mềm mại với lớp bọt sữa tinh tế, hương vị cân bằng giữa cà phê và sữa.</p>
+                            <div class="price">38.000₫</div>
+                            <button class="add-to-cart">Thêm vào Giỏ</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-type="coffee-milk" data-price="42000">
+                        <div class="product-image"><img src="images/latte kem.PNG" alt="Latte Kem"></div>
+                        <div class="product-info">
+                            <h3>Latte Kem</h3>
+                            <p>Latte mượt mà với nhiều sữa, thêm kem tươi mát, thích hợp cho bất kỳ thời gian nào.</p>
+                            <div class="price">42.000₫</div>
+                            <button class="add-to-cart">Thêm vào Giỏ</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-type="coffee-ice" data-price="32000">
+                        <div class="product-image"><img src="images/cafe đá.PNG" alt="Cà Phê Đá"></div>
+                        <div class="product-info">
+                            <h3>Cà Phê Đá</h3>
+                            <p>Cà phê đen lạnh, sảng khoái và thơm ngon, hoàn hảo cho mùa hè và những ngày nắng.</p>
+                            <div class="price">32.000₫</div>
+                            <button class="add-to-cart">Thêm vào Giỏ</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-type="coffee-milk" data-price="40000">
+                        <div class="product-image"><img src="images/mocha.PNG" alt="Mocha"></div>
+                        <div class="product-info">
+                            <h3>Mocha</h3>
+                            <p>Hỗn hợp cà phê, sô-cô-la và sữa, tạo ra hương vị phong phú và hấp dẫn.</p>
+                            <div class="price">40.000₫</div>
+                            <button class="add-to-cart">Thêm vào Giỏ</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-type="coffee-black" data-price="30000">
+                        <div class="product-image"><img src="images/Cà Phê Sữa Đặc.PNG" alt="Cà Phê Sữa Đặc"></div>
+                        <div class="product-info">
+                            <h3>Cà Phê Sữa Đặc</h3>
+                            <p>Cà phê truyền thống với sữa đặc ngọt, mang lại hương vị đặc trưng Việt Nam.</p>
+                            <div class="price">30.000₫</div>
+                            <button class="add-to-cart">Thêm vào Giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="desserts">
+        <div class="container">
+            <h2>🍰 Món Tráng Miệng</h2>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image"><img src="images/Cheesecake Bơ.PNG" alt="Cheesecake"></div>
+                    <div class="product-info">
+                        <h3>Cheesecake Bơ</h3>
+                        <p>Cheesecake mịn màng, lớp sốt trái cây tươi ngon.</p>
+                        <div class="price">48.000₫</div>
+                        <button class="add-to-cart">Thêm vào Giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="images/Tiramisu.PNG" alt="Tiramisu"></div>
+                    <div class="product-info">
+                        <h3>Tiramisu</h3>
+                        <p>Lớp kem mịn hòa quyện với vị cà phê nhẹ nhàng.</p>
+                        <div class="price">52.000₫</div>
+                        <button class="add-to-cart">Thêm vào Giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="images/Chocolate Mousse.PNG" alt="Chocolate Mousse"></div>
+                    <div class="product-info">
+                        <h3>Chocolate Mousse</h3>
+                        <p>Hương socola đậm đà, mousse nhẹ tan trong miệng.</p>
+                        <div class="price">45.000₫</div>
+                        <button class="add-to-cart">Thêm vào Giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="images/Fruit Tart.PNG" alt="Fruit Tart"></div>
+                    <div class="product-info">
+                        <h3>Fruit Tart</h3>
+                        <p>Bánh tart giòn, trái cây tươi và kem custard.</p>
+                        <div class="price">42.000₫</div>
+                        <button class="add-to-cart">Thêm vào Giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Liên Hệ Chúng Tôi</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Địa Chỉ</h3>
+                    <p>Thành phố Tân Uyên, Bình Dương</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🗺️ Bản Đồ</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.812586473916!2d106.7696364!3d10.977514399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174da34c7159483%3A0xeb496501042687fe!2zVHLGsOG7nW5nIFRydW5nIEPhuqVwIEPDtG5nIE5naGnhu4dwIELDrW5oIETGsMahbmc!5e0!3m2!1svi!2s!4v1769135564521!5m2!1svi!2s" width="250" height="190" style="border:0; margin-top: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="contact-item">
+                    <h3>📞 Điện Thoại</h3>
+                    <p>0935 656 603</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p>truongtccnbd@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <h3>⏰ Giờ Mở Cửa</h3>
+                    <p>Thứ Hai - Chủ Nhật<br>7:00 - 22:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="history">
+        <div class="container">
+            <h2>📋 Lịch Sử Mua Hàng</h2>
+            <div id="historyItems">
+                <div class="empty-history">
+                    <p>Bạn chưa có đơn hàng nào</p>
+                    <a href="#products" class="cta-button">Mua Hàng Ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cart">
+        <div class="container">
+            <h2>🛒 Giỏ Hàng Của Bạn</h2>
+            <div id="cartItems">
+                <div class="empty-cart">
+                    <p>Giỏ hàng của bạn trống</p>
+                    <a href="#products" class="cta-button" onclick="hideCartAndHistory(); return false;">Tiếp tục mua sắm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order-summary">
+        <div class="container">
+            <div class="cart-summary">
+                <h3>Tóm Tắt Đơn Hàng</h3>
+                <div class="summary-item"><span>Tổng sản phẩm:</span><span id="totalItems">0</span></div>
+                <div class="summary-item"><span>Giảm giá:</span><span>0₫</span></div>
+                <div class="summary-item"><span>Phí vận chuyển:</span><span id="shipping">0₫</span></div>
+                <div class="summary-total"><span>Tổng cộng:</span><span id="totalPrice">0₫</span></div>
+                <button id="checkoutBtn" onclick="checkout()" disabled>Thanh Toán</button>
+                <p style="text-align: center; margin-top: 15px; color: #999; font-size: 14px;">Nhấn vào "Thêm vào Giỏ" để bắt đầu</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="creators">
+    <div class="container">
+        <h2>👥 Những Người Tạo Ra Trang Web</h2>
+        <div class="creators-grid">
+
+            <!-- Creator 1 -->
+            <div class="creator-card">
+                <img src="user2/dev1.PNG" alt="Người Tạo 1" class="creator-avatar">
+                <h3>Tên Người Tạo 1</h3>
+
+                <p class="creator-birth">📅 Ngày sinh: 28/6/2008</p>
+                <p class="creator-student-id">🎓 Mã sinh viên: 22IT0XX</p>
+                <p class="creator-school">🏫 Trường: Trung Cấp Công Nghiệp Bình Dương</p>
+                <p class="creator-year">📘 Năm học: 2024 – 2025</p>
+
+                <p class="creator-role">Frontend & Giao diện</p>
+            </div>
+
+            <!-- Creator 2 -->
+            <div class="creator-card">
+                <img src="user2/dev2.PNG" alt="Người Tạo 2" class="creator-avatar">
+                <h3>Tên Người Tạo 2</h3>
+
+                <p class="creator-birth">📅 Ngày sinh: 15/5/2009</p>
+                <p class="creator-student-id">🎓 Mã sinh viên: 22IT0YY</p>
+                <p class="creator-school">🏫 Trường: Trung Cấp Công Nghiệp Bình Dương</p>
+                <p class="creator-year">📘 Năm học: 2024 – 2025</p>
+
+                <p class="creator-role">Xử lý logic & dữ liệu</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <footer>
+        <p>&copy; 2026 Cà Phê. Tất cả quyền được bảo lưu. | Hotline: 0935 656 603</p>
+    </footer>
+
+    <div class="float-cart" onclick="scrollToCart()">🛒<span class="float-cart-count" id="floatCartCount">0</span></div>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab-button active" onclick="switchToLogin()">Đăng Nhập</button>
+                <button class="auth-tab-button" onclick="switchToRegister()">Đăng Ký</button>
+            </div>
+            <div id="loginTab" class="auth-tab active">
+                <h2>Đăng Nhập</h2>
+                <form onsubmit="handleLogin(event)">
+                    <input type="email" id="loginEmail" placeholder="Email của bạn" required>
+                    <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                    <button type="submit" class="btn-submit">Đăng Nhập</button>
+                </form>
+                <p class="tab-switch">Chưa có tài khoản? <a href="#" onclick="switchToRegister()">Đăng Ký Ngay</a></p>
+            </div>
+            <div id="registerTab" class="auth-tab">
+                <h2>Đăng Ký</h2>
+                <form onsubmit="handleRegister(event)">
+                    <input type="text" id="registerName" placeholder="Tên của bạn" required>
+                    <input type="email" id="registerEmail" placeholder="Email của bạn" required>
+                    <input type="password" id="registerPassword" placeholder="Mật khẩu" required>
+                    <input type="password" id="registerPasswordConfirm" placeholder="Xác nhận mật khẩu" required>
+                    <button type="submit" class="btn-submit">Đăng Ký</button>
+                </form>
+                <p class="tab-switch">Đã có tài khoản? <a href="#" onclick="switchToLogin()">Đăng Nhập</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
