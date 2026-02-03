@@ -198,6 +198,7 @@ section h2::after {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px; margin-bottom: 0;
+    align-items: start;
 }
 #desserts .products {
     display: grid; grid-template-columns: repeat(4, 1fr);
@@ -209,7 +210,7 @@ section h2::after {
     overflow: hidden; box-shadow: var(--shadow-sm);
     transition: all 0.3s ease; display: flex;
     flex-direction: column; border: 1px solid #f0f0f0;
-    position: relative;
+    position: relative; height: 520px; flex-shrink: 0;
 }
 .product-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0;
@@ -238,20 +239,23 @@ section h2::after {
 .product-info {
     padding: 25px; flex: 1;
     display: flex; flex-direction: column;
+    justify-content: space-between;
 }
 .product-info h3 {
     color: var(--primary); margin-bottom: 10px;
     font-size: 18px; font-weight: 700;
 }
 .product-info p {
-    color: #666; margin-bottom: 20px;
+    color: #666; margin-bottom: 0;
     font-size: 14px; flex: 1;
 }
 
 .price {
     font-size: 24px; color: var(--accent);
     font-weight: 700; margin-bottom: 15px;
+    margin-top: auto;
 }
+
 .add-to-cart {
     width: 100%; padding: 12px;
     background: var(--primary); color: var(--white);
@@ -262,6 +266,33 @@ section h2::after {
 .add-to-cart:hover {
     background: transparent; color: var(--primary);
     transform: translateY(-2px);
+}
+
+.no-products {
+    text-align: center; padding: 40px 20px;
+    background: var(--white); border-radius: 12px;
+    box-shadow: var(--shadow-sm); margin-top: 20px;
+}
+.no-products p {
+    font-size: 16px; color: #666; margin-bottom: 20px;
+}
+
+/* ============ CHECKOUT & HISTORY ============ */
+#checkout-history {
+    display: none; padding: 40px 0;
+    background: var(--light);
+}
+#checkout-history .container {
+    max-width: 800px;
+}
+.checkout-section, .history-section {
+    background: var(--white); padding: 25px;
+    border-radius: 12px; margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+}
+.checkout-section h3, .history-section h3 {
+    color: var(--primary); margin-bottom: 15px;
+    font-size: 20px; font-weight: 700;
 }
 
 /* ============ CONTACT ============ */
@@ -363,6 +394,57 @@ section h2::after {
     margin-top: 15px;
 }
 
+.btn-add-member {
+    display: block;
+    margin: 20px auto;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn-add-member:hover {
+    background: var(--accent);
+}
+
+.add-member-form {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.add-member-form h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.add-member-form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.add-member-form form label {
+    grid-column: 1;
+}
+
+.add-member-form form input {
+    grid-column: 2;
+}
+
+.add-member-form form button {
+    grid-column: span 2;
+    justify-self: center;
+}
+
 /* ============ CART & HISTORY ============ */
 #cart, #history {
     background: var(--light); display: none;
@@ -453,7 +535,7 @@ section h2::after {
 }
 .history-item-row {
     display: flex; justify-content: space-between;
-    padding: 10px 0; font-size: 14px;
+    align-items: center; padding: 10px 0; font-size: 14px;
 }
 .history-total {
     display: flex; justify-content: space-between;
@@ -479,7 +561,7 @@ section h2::after {
 
 .summary-item {
     display: flex; justify-content: space-between;
-    margin-bottom: 15px; padding-bottom: 15px;
+    align-items: center; margin-bottom: 15px; padding-bottom: 15px;
     border-bottom: 1px solid #f0f0f0; font-size: 14px;
 }
 .summary-total {
@@ -699,14 +781,13 @@ footer {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
-    .product-image { height: 150px; }
-    .product-info {
-        padding: 12px;
+    .product-card {
+        height: 450px; flex-shrink: 0;
     }
     .product-info h3 { font-size: 15px; }
-    .product-info p { font-size: 12px; margin-bottom: 12px; }
-    .price { font-size: 16px; margin-bottom: 10px; }
-    .add-to-cart { padding: 10px; font-size: 12px; }
+    .product-info p { font-size: 12px; margin-bottom: 0; }
+    .price { font-size: 16px; margin-bottom: 10px; margin-top: auto; margin-top: 40px; }
+    .add-to-cart { padding: 10px; font-size: 12px; min-height: 44px; }
 
     /* Contact */
     .contact-info { grid-template-columns: 1fr; gap: 25px; }
@@ -738,6 +819,19 @@ footer {
     .creator-role {
         font-size: 12px;
     }
+
+    /* Add Member Form */
+    .btn-add-member { font-size: 15px; padding: 10px 18px; min-height: 44px; }
+    .add-member-form { padding: 18px; }
+    .add-member-form h3 { font-size: 18px; margin-bottom: 14px; }
+    .add-member-form form { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 9px; 
+    }
+    .add-member-form label { font-size: 14px; }
+    .add-member-form input { padding: 9px; font-size: 14px; }
+    .btn-submit { padding: 9px; font-size: 15px; min-height: 44px; }
 
     /* Cart */
     .cart-item {
@@ -805,12 +899,16 @@ footer {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
-    .product-image { height: 120px; }
-    .product-info { padding: 10px; }
-    .product-info h3 { font-size: 13px; margin-bottom: 6px; }
-    .product-info p { font-size: 11px; margin-bottom: 8px; line-height: 1.4; }
-    .price { font-size: 14px; margin-bottom: 8px; }
-    .add-to-cart { padding: 8px; font-size: 11px; }
+    .product-card {
+        min-height: 500px; flex-shrink: 0;
+    }
+    .add-to-cart {
+        padding: 8px;
+        font-size: 12px;
+        min-height: 44px;
+        display: block;
+        width: 100%;
+    }
 
     /* Contact */
     .contact-item h3 { font-size: 14px; margin-bottom: 10px; }
@@ -859,4 +957,27 @@ footer {
 
     /* Footer */
     footer { padding: 20px 15px; font-size: 11px; }
+
+    /* Add Member Form */
+    .btn-add-member { font-size: 14px; padding: 8px 16px; min-height: 44px; }
+    .add-member-form { padding: 15px; }
+    .add-member-form h3 { font-size: 16px; margin-bottom: 12px; }
+    .add-member-form form { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 8px; 
+    }
+    .add-member-form form button {
+        display: inline-block;
+        width: 48%;
+        margin: 0 1%;
+    }
 }
+
+/* Ẩn mũi tên lên xuống trong input number */
+input[type="number"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
